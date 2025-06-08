@@ -1,19 +1,73 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
-import { TUser } from "@utils-types";
+import { registerUser } from './userApi';
 
-import { logoutApi, 
-  updateUserApi, 
+import { TRegisterData } from '@api';
+
+import {
+  logoutApi,
+  updateUserApi,
   getUserApi,
-  resetPasswordApi, 
-  forgotPasswordApi, 
-  loginUserApi, 
-  registerUserApi } from "@api";
+  resetPasswordApi,
+  forgotPasswordApi,
+  loginUserApi,
+  registerUserApi
+} from '@api';
+
+type TypeInitialState = {
+  userData: TRegisterData | null;
+  isLoading: boolean;
+  registerError: string | null;
+  loginError: string | null;
+};
+
+const initialState: TypeInitialState = {
+  userData: null,
+  isLoading: false,
+  registerError: null,
+  loginError: null
+};
+
+const userApiSlice = createSlice({
+  name: 'user',
+  initialState,
+  reducers: {},
+  selectors: {
+    selectUserData: (state) => state.userData
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(registerUser.pending, (state) => {
+        state.isLoading = true;
+        state.registerError = null;
+      })
+      .addCase(registerUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.registerError = action.error.message ?? 'Ошибка при регистрации';
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.registerError = null;
+      });
+    //  .addCase(loginUserApi.pending, (state) => {
+    //   state.isLoading = true
+    //   state.registerError = null
+    // })
+    // .addCase(loginUserApi.rejected, (state, action) => {
+    //   state.isLoading = false
+    //   state.registerError = action.error.message ?? "Ошибка при регистрации"
+    // })
+    // .addCase(loginUserApi.fulfilled, (state, action) => {
+    //   state.isLoading = false
+    //   state.registerError = null
+    // })
+  }
+});
 
 
+export const {
+  selectUserData
+} = userApiSlice.selectors;
 
-  const userApiSlice = createSlice({
-    name: "user", 
-    
-  })
-
+export const { selectUserData } = userApiSlice.selectors;
+export default userApiSlice.reducer;

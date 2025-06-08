@@ -1,11 +1,10 @@
-import React from 'react'
+// import React from 'react'
 
-const ProtectedRoute = ({ children}) => {
-  const location = useLocation()
-  const user = useSelector()
+// const ProtectedRoute = ({ children}) => {
+//   const location = useLocation()
+//   const user = useSelector()
 
+//   return ()
+// }
 
-  return ()
-}
-
-export default ProtectedRoute
+// export default ProtectedRoute
