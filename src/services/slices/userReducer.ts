@@ -1,18 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-
 import { registerUser } from './userApi';
-
 import { TRegisterData } from '@api';
-
-import {
-  logoutApi,
-  updateUserApi,
-  getUserApi,
-  resetPasswordApi,
-  forgotPasswordApi,
-  loginUserApi,
-  registerUserApi
-} from '@api';
 
 type TypeInitialState = {
   userData: TRegisterData | null;
@@ -49,25 +37,8 @@ const userApiSlice = createSlice({
         state.isLoading = false;
         state.registerError = null;
       });
-    //  .addCase(loginUserApi.pending, (state) => {
-    //   state.isLoading = true
-    //   state.registerError = null
-    // })
-    // .addCase(loginUserApi.rejected, (state, action) => {
-    //   state.isLoading = false
-    //   state.registerError = action.error.message ?? "Ошибка при регистрации"
-    // })
-    // .addCase(loginUserApi.fulfilled, (state, action) => {
-    //   state.isLoading = false
-    //   state.registerError = null
-    // })
   }
 });
-
-
-export const {
-  selectUserData
-} = userApiSlice.selectors;
 
 export const { selectUserData } = userApiSlice.selectors;
 export default userApiSlice.reducer;

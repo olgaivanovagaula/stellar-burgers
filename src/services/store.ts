@@ -1,7 +1,5 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-
-import userReducer from "./slices/userReducer"
-
+import userReducer from './slices/userReducer';
 import {
   TypedUseSelectorHook,
   useDispatch as dispatchHook,
@@ -18,7 +16,6 @@ const store = configureStore({
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
-
 export type AppDispatch = typeof store.dispatch;
 
 export const useDispatch: () => AppDispatch = () => dispatchHook();

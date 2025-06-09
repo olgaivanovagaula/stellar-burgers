@@ -31,9 +31,9 @@ const App = () => {
     navigate(-1);
   };
   return (
-    <Router>
-      <div className={styles.app}>
-        <AppHeader />
+    <div className={styles.app}>
+      <AppHeader />
+      <Routes>
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
         <Route path='/login' element={<Login />} />
@@ -70,8 +70,8 @@ const App = () => {
             </Modal>
           }
         />
-      </div>
-    </Router>
+      </Routes>
+    </div>
   );
 };
 export default App;
