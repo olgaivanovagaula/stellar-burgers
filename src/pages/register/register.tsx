@@ -1,7 +1,7 @@
 import { FC, SyntheticEvent, useState } from 'react';
 import { RegisterUI } from '@ui-pages';
-import { registerUser } from '../..//services/slices/userApi';
-import { useDispatch } from '../..//services/store';
+import { registerUser } from '../../services/slices/users/userApi';
+import { useDispatch } from '../../services/store';
 
 export const Register: FC = () => {
   const dispatch = useDispatch();

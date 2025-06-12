@@ -1,5 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import userReducer from './slices/userReducer';
+import userReducer from './slices/users/userReducer';
+import infoOrderReducer from './slices/orders/orders';
 import {
   TypedUseSelectorHook,
   useDispatch as dispatchHook,
@@ -7,7 +8,8 @@ import {
 } from 'react-redux';
 
 const rootReducer = combineReducers({
-  user: userReducer
+  user: userReducer,
+  orders: infoOrderReducer
 });
 
 const store = configureStore({

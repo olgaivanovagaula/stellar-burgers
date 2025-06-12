@@ -1,5 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { registerUser, loginUser, logoutUser, updateUser, forgotUserPass, getUser } from './userApi';
+import {
+  registerUser,
+  loginUser,
+  logoutUser,
+  updateUser,
+  forgotUserPass,
+  getUser
+} from './userApi';
 import { TRegisterData } from '@api';
 import { TUser } from '@utils-types';
 
@@ -8,7 +15,7 @@ type TypeInitialState = {
   isLoading: boolean;
   registerError: string | null;
   loginError: string | null;
-  authChecked: boolean
+  authChecked: boolean;
   logoutError: string | null;
   updatedError: string | null;
   forgotError: string | null;
@@ -45,15 +52,14 @@ const userApiSlice = createSlice({
       .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;
         state.registerError = action.error.message ?? 'Ошибка при регистрации';
-        state.authChecked = true
+        state.authChecked = true;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.registerError = null;
-        state.isAuthentificatied = true
-        state.userData = action.payload.user
+        state.isAuthentificatied = true;
+        state.userData = action.payload.user;
       })
-
 
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
@@ -63,7 +69,6 @@ const userApiSlice = createSlice({
         state.authChecked = false;
         state.isLoading = false;
         state.loginError = action.error.message ?? 'Ошибка при входе';
-        
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.authChecked = true;
@@ -72,7 +77,6 @@ const userApiSlice = createSlice({
         state.isAuthentificatied = true;
         state.userData = action.payload.user;
       })
-
 
       .addCase(logoutUser.pending, (state) => {
         state.isLoading = true;
@@ -83,14 +87,13 @@ const userApiSlice = createSlice({
         state.logoutError = action.error.message ?? 'Ошибка при выходе';
       })
       .addCase(logoutUser.fulfilled, (state, action) => {
-        state.authChecked = false
+        state.authChecked = false;
         state.isLoading = false;
         state.logoutError = null;
-        state.userData = null
+        state.userData = null;
       })
 
-
-       .addCase(updateUser.pending, (state) => {
+      .addCase(updateUser.pending, (state) => {
         state.isLoading = true;
         state.updatedError = null;
       })
@@ -101,11 +104,10 @@ const userApiSlice = createSlice({
       .addCase(updateUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.updatedError = null;
-        state.userData = action.payload.user
+        state.userData = action.payload.user;
       })
 
-
-       .addCase(forgotUserPass.pending, (state) => {
+      .addCase(forgotUserPass.pending, (state) => {
         state.isLoading = true;
         state.forgotError = null;
       })
@@ -118,7 +120,6 @@ const userApiSlice = createSlice({
         state.forgotError = null;
       })
 
-
       .addCase(getUser.pending, (state) => {
         state.isLoading = true;
         state.checkAuthError = null;
@@ -130,9 +131,8 @@ const userApiSlice = createSlice({
       .addCase(getUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.checkAuthError = null;
-        state.userData = action.payload.user
-      })
-      
+        state.userData = action.payload.user;
+      });
   }
 });
 
