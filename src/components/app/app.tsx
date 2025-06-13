@@ -7,6 +7,8 @@ import {
 import { ConstructorPage } from '@pages';
 import '../../index.css';
 import styles from './app.module.css';
+import { useEffect } from 'react';
+import { fetchIngridients } from '../../services/slices/ingridients/ingridientsApi';
 
 import { AppHeader } from '@components';
 import {
@@ -24,12 +26,19 @@ import { Modal } from '@components';
 import { OrderInfo } from '@components';
 import { IngredientDetails } from '@components';
 
+import { useDispatch } from '../../services/store';
+
 const App = () => {
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const onCloseModal = () => {
     navigate(-1);
   };
+  useEffect(() => {
+    dispatch(fetchIngridients());
+  }, []);
   return (
     <div className={styles.app}>
       <AppHeader />
