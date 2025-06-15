@@ -6,12 +6,14 @@ type TInitState = {
   error: string | null;
   ingridients: TIngredient[];
   isLoading: boolean;
+  isLoaded: boolean;
 };
 
 const initialState: TInitState = {
   error: null,
   ingridients: [],
-  isLoading: false
+  isLoading: false,
+  isLoaded: false
 };
 
 export const fetchIngridients = createAsyncThunk(
@@ -29,6 +31,7 @@ const burgerIngridSlice = createSlice({
         state.isLoading = false;
         state.error =
           action.error.message || 'Не удалось загрузить ингридиенты';
+        state.isLoaded = false;
       })
       .addCase(fetchIngridients.pending, (state, action) => {
         state.isLoading = true;
@@ -38,6 +41,7 @@ const burgerIngridSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.ingridients = action.payload;
+        state.isLoaded = true;
       });
   }
 });
