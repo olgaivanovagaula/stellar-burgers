@@ -9,8 +9,9 @@ import { FC } from 'react';
 
 export const ConstructorPage: FC = () => {
   /** TODO: взять переменную из стора */
-  const isIngredientsLoading = false;
-
+  const isIngredientsLoading = useSelector(
+    (state) => state.ingridients_loader.isLoading
+  );
   return (
     <>
       {isIngredientsLoading ? (
